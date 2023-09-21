@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BankController as B;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('banks')->name('banks-')->group(function () {
+    Route::get('/', [B::class, 'index'])->name('index'); // all banks
+    Route::get('/show/{bank}', [B::class, 'show'])->name('show'); // show one bank
+
+    Route::get('/create', [B::class, 'create'])->name('create'); // show create form
+    Route::get('/edit/{bank}', [B::class, 'edit'])->name('edit'); // show edit form
+    Route::get('/delete/{bank}', [B::class, 'delete'])->name('delete'); // show delete confirmation
+
+    Route::post('/', [B::class, 'store'])->name('store'); // store new bank
+    Route::put('/{bank}', [B::class, 'update'])->name('update'); // update existing bank
+    Route::delete('/{bank}', [B::class, 'destroy'])->name('destroy'); // delete existing bank
 });
 
 Auth::routes();
