@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
-use App\Http\Requests\StoreBankRequest;
-use App\Http\Requests\UpdateBankRequest;
+use Illuminate\Http\Request;
 
 class BankController extends Controller
 {
@@ -27,9 +26,18 @@ class BankController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBankRequest $request)
+    public function store(Request $request)
     {
-        //
+        $bank = new Bank;
+
+        $bank->account_date = $request->date;
+        $bank->client_firstname = $request->first_name;
+        $bank->client_lastname = $request->last_name;
+        $bank->client_code = $request->personal_code;
+
+        $bank->save();
+
+        return redirect()->route('banks-index');
     }
 
     /**
@@ -51,7 +59,7 @@ class BankController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBankRequest $request, Bank $bank)
+    public function update(Request $request, Bank $bank)
     {
         //
     }
