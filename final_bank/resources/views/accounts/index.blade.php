@@ -13,13 +13,13 @@
 
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <h4>Client name</h4>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <h4>Account number</h4>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <h4>Account amount</h4>
                                 </div>
                                 <div class="col-md-5">
@@ -30,16 +30,16 @@
                         @foreach ($accounts as $account)
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     {{$account->bank->client_firstname}}
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     {{$account->account_number}}
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     {{$account->account_amount}}
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="buttons-bin">
                                         <a href="{{route('accounts-show', $account->id)}}" class="btn btn-primary">Show</a>
                                         <a href="{{route('accounts-edit', $account->id)}}" class="btn btn-primary">Edit</a>

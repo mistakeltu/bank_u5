@@ -10,7 +10,7 @@
                     <h1>Confirm Delete Bank Account Number</h1>
                 </div>
                 <div class="card-body">
-                    <form action={{route('accounts-destroy', $bank)}} method="post">
+                    <form action={{route('accounts-destroy', $account)}} method="post">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
