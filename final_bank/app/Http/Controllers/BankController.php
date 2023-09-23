@@ -24,7 +24,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('banks.create');
+        return view('banks.create')->with('msg', ['type' => 'success', 'content' => 'Account was created successfully.']);
     }
 
     /**
@@ -38,6 +38,7 @@ class BankController extends Controller
         $bank->client_firstname = $request->first_name;
         $bank->client_lastname = $request->last_name;
         $bank->client_code = $request->personal_code;
+        $bank->bank_amount = $request->bank_amount;
 
         $bank->save();
 
@@ -57,7 +58,9 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        //
+        return view('banks.edit', [
+            'bank' => $bank,
+        ]);
     }
 
     /**
@@ -65,7 +68,16 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
-        //
+        $bank->account_date = $request->date;
+        $bank->client_firstname = $request->first_name;
+        $bank->client_lastname = $request->last_name;
+        $bank->client_code = $request->personal_code;
+        $bank->bank_amount = $request->bank_amount;
+
+        $bank->save();
+
+        return redirect()->route('banks-index')
+            ->with('msg', ['type' => 'success', 'content' => 'Account was updated successfully.']);
     }
 
     public function delete(Bank $bank)
@@ -83,8 +95,8 @@ class BankController extends Controller
         $bank->delete(); // delete the object from the database
 
         return redirect()
-            ->route('banks-index');
-        // ->with('msg', ['type' => 'info', 'content' => 'Invoice was deleted successfully.']);
+            ->route('banks-index')
+            ->with('msg', ['type' => 'info', 'content' => 'Account was deleted successfully.']);
         // redirect to the index page with a info message
     }
 }
