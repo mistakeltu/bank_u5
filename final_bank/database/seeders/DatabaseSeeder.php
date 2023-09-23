@@ -45,5 +45,13 @@ class DatabaseSeeder extends Seeder
                 'bank_amount' => 0,
             ]);
         }
+
+        foreach (range(1, 20) as $index) {
+            DB::table('accounts')->insert([
+                'bank_id' => $faker->numberBetween(1, 20),
+                'account_number' => 'LT' . $faker->numberBetween(100000000000000000, 999999999999999999),
+                'account_amount' => 0,
+            ]);
+        }
     }
 }
