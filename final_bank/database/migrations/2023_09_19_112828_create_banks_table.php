@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('client_lastname');
             $table->string('client_code');
 
+            $table->string('bank_amount');
+
             $table->timestamps();
         });
     }

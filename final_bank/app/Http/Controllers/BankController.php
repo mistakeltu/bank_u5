@@ -12,7 +12,11 @@ class BankController extends Controller
      */
     public function index()
     {
-        //
+        $banks = Bank::all();
+
+        return view('banks.index', [
+            'banks' => $banks,
+        ]);
     }
 
     /**
@@ -64,11 +68,23 @@ class BankController extends Controller
         //
     }
 
+    public function delete(Bank $bank)
+    {
+        return view('banks.delete', [
+            'bank' => $bank,
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Bank $bank)
     {
-        //
+        $bank->delete(); // delete the object from the database
+
+        return redirect()
+            ->route('banks-index');
+        // ->with('msg', ['type' => 'info', 'content' => 'Invoice was deleted successfully.']);
+        // redirect to the index page with a info message
     }
 }
