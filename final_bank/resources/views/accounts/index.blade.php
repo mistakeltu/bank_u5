@@ -20,7 +20,7 @@
                                     <h4>Account number</h4>
                                 </div>
                                 <div class="col-md-3">
-                                    <h4>Account amount</h4>
+                                    <h4>Account amount </h4>
                                 </div>
                                 <div class="col-md-5">
                                 </div>
@@ -37,12 +37,12 @@
                                     {{$account->account_number}}
                                 </div>
                                 <div class="col-md-3">
-                                    {{$account->account_amount}}
+                                    <b>{{$account->account_amount}} eur </b>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="buttons-bin">
                                         <a href="{{route('accounts-show', $account->id)}}" class="btn btn-primary">Show</a>
-                                        <a href="{{route('accounts-edit', $account->id)}}" class="btn btn-primary">Edit</a>
+                                        <a href="{{route('accounts-edit', $account->id)}}" class="btn btn-primary">Money</a>
                                         <a href="{{route('accounts-delete', $account->id)}}" class="btn btn-danger">Delete</a>
                                     </div>
                                 </div>

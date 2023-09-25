@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
                 'client_lastname' => $faker->company(),
                 'client_code' => $faker->numberBetween(10000000000, 99999999999),
                 'bank_amount' => 0,
+                // 'account_amount' => 0
             ]);
         }
 

@@ -84,6 +84,7 @@ class BankController extends Controller
     {
         return view('banks.delete', [
             'bank' => $bank,
+            'accCount' => $bank->accounts()->count(),
         ]);
     }
 

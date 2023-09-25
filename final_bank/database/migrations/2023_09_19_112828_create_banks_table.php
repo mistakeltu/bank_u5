@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('client_lastname');
             $table->string('client_code');
 
-            $table->integer('bank_amount');
+            $table->integer('bank_amount')->nullable();
+
+            // $table->string('account_amount');
+            // $table->foreign('account_amount')->references('account_amount')->on('accounts');
 
             $table->timestamps();
         });

@@ -37,7 +37,7 @@ class AccountController extends Controller
     {
         $account = new Account;
 
-        $account->account_number = $request->account_number;
+        $account->account_number = 'LT' . rand(100000000000000000, 999999999999999999);
         $account->account_amount = 0;
         $account->bank_id = $request->bank_id;
 
@@ -51,7 +51,9 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //
+        return view('accounts.show', [
+            'account' => $account,
+        ]);
     }
 
     /**
@@ -69,21 +71,29 @@ class AccountController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        $account->account_number = $request->account_number;
-        $account->account_amount += $request->add_amount;
-        $account->account_amount -= $request->sub_amount;
-        // $account->bank_id = $request->bank_id;
+        $addAmount = $request->add_amount;
+        $subAmount = $request->sub_amount;
 
-        $account->save();
+        if ($account->account_amount - $subAmount >= 0) {
+            $account->account_amount += $addAmount;
+            $account->account_amount -= $subAmount;
 
-        return redirect()->route('accounts-index')
-            ->with('msg', ['type' => 'success', 'content' => 'Account was updated successfully.']);
+            $account->save();
+
+            return redirect()->route('accounts-index')
+                ->with('msg', ['type' => 'success', 'content' => 'Account was updated successfully.']);
+        } else {
+
+            return redirect()->route('accounts-index')
+                ->with('msg', ['type' => 'danger', 'content' => 'Account cant be negative.']);
+        }
     }
 
     public function delete(Account $account)
     {
         return view('accounts.delete', [
             'account' => $account,
+            'accAmount' => $account->account_amount,
         ]);
     }
 

@@ -35,10 +35,10 @@
                                         <label class="form-label">Client personal code</label>
                                         <input type="number" class="form-control" placeholder="Client personal code" name="personal_code" value ={{$bank->client_code}}>
                                     </div>
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label class="form-label">Client bank amount</label>
                                         <input type="number" class="form-control" placeholder="Client personal code" name="bank_amount" value ={{$bank->bank_amount}}>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">

@@ -6,17 +6,35 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                  <h1>Edit account information</h1>
+                  <h1>Add or subtract money </h1>
                 </div>
                 <div class="card-body">
                     <form action={{route('accounts-update', $account)}} method="post">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Account number</label>
-                                        <input type="text" class="form-control" placeholder="Account number" name="account_number" value ={{$account->account_number}}>
-                                    </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Account number</label>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {{$account->account_number}}
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Account amount</label>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {{$account->account_amount}}
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Account client first name</label>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {{$account->bank->client_firstname}}
+                                        </div>
+                                      </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">

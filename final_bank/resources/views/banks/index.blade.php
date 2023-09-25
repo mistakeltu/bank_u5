@@ -25,8 +25,11 @@
                                 <div class="col-md-2">
                                     <h4>Client personal code</h4>
                                 </div>
-                                <div class="col-md-2">
+                                {{-- <div class="col-md-2">
                                     <h4>Amount</h4>
+                                </div> --}}
+                                <div class="col-md-2">
+                                    <h4>Accounts</h4>
                                 </div>
                                 <div class="col-md-5">
                                 </div>
@@ -48,12 +51,16 @@
                                 <div class="col-md-2">
                                     {{$bank->client_code}}
                                 </div>
+                                {{-- <div class="col-md-2">
+                                    <b>{{$bank->account->account_amount}} eur</b>
+                                </div> --}}
                                 <div class="col-md-2">
-                                    <b>{{$bank->bank_amount}} eur</b>
+                                    <b>{{$bank->accounts()->count()}} </b>
                                 </div>
+                                
                                 <div class="col-md-2">
                                     <div class="buttons-bin">
-                                        <a href="{{route('banks-show', $bank->id)}}" class="btn btn-primary">Show</a>
+                                        {{-- <a href="{{route('banks-show', $bank->id)}}" class="btn btn-primary">Show</a> --}}
                                         <a href="{{route('banks-edit', $bank->id)}}" class="btn btn-primary">Edit</a>
                                         <a href="{{route('banks-delete', $bank->id)}}" class="btn btn-danger">Delete</a>
                                     </div>
