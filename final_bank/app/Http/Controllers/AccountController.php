@@ -13,7 +13,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Account::all();
+        $accounts = Account::orderBy('account_amount', 'DESC')->paginate(15);
 
         return view('accounts.index', [
             'accounts' => $accounts,

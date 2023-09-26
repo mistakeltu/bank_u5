@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                  <h1>Create new bank account</h1>
+                  <h1>Create new bank client</h1>
                 </div>
                 <div class="card-body">
                     <form action={{route('banks-store')}} method="post">
@@ -35,10 +35,10 @@
                                         <label class="form-label">Client personal code</label>
                                         <input type="number" class="form-control" placeholder="Client personal code" name="personal_code">
                                     </div>
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label class="form-label">Client bank amount</label>
                                         <input type="number" class="form-control" placeholder="Client personal code" name="bank_amount">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">

@@ -17,7 +17,11 @@
                                         <label class="form-label">Account number</label>
                                         <div class="card">
                                             <div class="card-body">
+                                                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
                                                 {{$account->account_number}}
+                                                @else
+                                                <p style="color: red">You dont have permission.</p>
+                                                @endif
                                             </div>
                                           </div>
                                     </div>
@@ -25,7 +29,11 @@
                                         <label class="form-label">Account amount</label>
                                         <div class="card">
                                             <div class="card-body">
+                                                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
                                                 {{$account->account_amount}}
+                                                @else
+                                                <p style="color: red">You dont have permission.</p>
+                                                @endif
                                             </div>
                                           </div>
                                     </div>

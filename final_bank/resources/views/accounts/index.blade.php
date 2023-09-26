@@ -42,8 +42,10 @@
                                 <div class="col-md-3">
                                     <div class="buttons-bin">
                                         <a href="{{route('accounts-show', $account->id)}}" class="btn btn-primary">Show</a>
+                                        @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
                                         <a href="{{route('accounts-edit', $account->id)}}" class="btn btn-primary">Money</a>
                                         <a href="{{route('accounts-delete', $account->id)}}" class="btn btn-danger">Delete</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -51,6 +53,7 @@
                         @endforeach
                       </ul>
                 </div>
+                {{$accounts->links()}}
             </div>
         </div>
     </div>

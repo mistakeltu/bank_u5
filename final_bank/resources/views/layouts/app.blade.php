@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    FINAL BANK
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -38,6 +38,20 @@
                         <!-- Authentication Links -->
                         @guest
 
+
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Clients
@@ -47,9 +61,12 @@
                                 <a class="dropdown-item" href="{{ route('banks-index') }}" >
                                     Clients list
                                 </a>
+
+                                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
                                 <a class="dropdown-item" href="{{ route('banks-create') }}" >
                                     New Client
                                 </a>
+                                @endif
 
                             </div>
                         </li>
@@ -64,25 +81,15 @@
                                     Accounts list
                                 </a>
 
+                                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
                                 <a class="dropdown-item" href="{{ route('accounts-create') }}" >
                                     New Account
-                                </a>
+                                </a>    
+                                @endif
 
                             </div>
                         </li>
 
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

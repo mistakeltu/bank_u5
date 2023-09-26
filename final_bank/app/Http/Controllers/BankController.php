@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use Illuminate\Http\Request;
 
+
 class BankController extends Controller
 {
     /**
@@ -12,7 +13,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::all();
+
+        $banks = Bank::orderBy('client_lastname')->paginate(15);
 
         return view('banks.index', [
             'banks' => $banks,
