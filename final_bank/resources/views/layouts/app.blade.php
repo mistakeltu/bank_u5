@@ -38,7 +38,6 @@
                         <!-- Authentication Links -->
                         @guest
 
-
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -51,6 +50,16 @@
                                 </li>
                             @endif
                         @else
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">Home page</a>
+                        </li>
+
+                        @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">Send money</a>
+                        </li>
+                        @endif
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
