@@ -15,7 +15,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">Date</label>
-                                        <input type="text" class="form-control" placeholder="bank account date" name="date">
+                                        <input type="text" class="form-control" placeholder="bank account date" name="date" value="{{old('date')}}">
                                     </div>
                                 </div>
                             </div>
@@ -25,15 +25,15 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Client first name</label>
-                                        <input type="text" class="form-control" placeholder="Client first name" name="first_name">
+                                        <input type="text" class="form-control" placeholder="Client first name" name="first_name" value="{{old('first_name')}}">
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Client last name</label>
-                                        <input type="text" class="form-control" placeholder="Client last name" name="last_name">
+                                        <input type="text" class="form-control" placeholder="Client last name" name="last_name" value="{{old('last_name')}}">
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Client personal code</label>
-                                        <input type="number" class="form-control" placeholder="Client personal code" name="personal_code">
+                                        <input type="number" class="form-control" placeholder="Client personal code" name="personal_code" value="{{old('personal_code')}}">
                                     </div>
                                     {{-- <div class="mb-3">
                                         <label class="form-label">Client bank amount</label>

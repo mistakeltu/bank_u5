@@ -57,7 +57,7 @@
 
                         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">Send money</a>
+                            <a class="nav-link" href="{{ url('/transfers/create') }}">Send money</a>
                         </li>
                         @endif
 
@@ -123,6 +123,7 @@
         </nav>
 
         <main class="py-4">
+            @include('layouts.errors')
             @include('layouts.messages')
             @yield('content')
         </main>

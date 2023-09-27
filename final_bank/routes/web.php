@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController as A;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController as B;
 use App\Http\Controllers\HomeController as H;
+use App\Http\Controllers\TransferController as T;
 
 
 /*
@@ -49,5 +50,12 @@ Route::prefix('accounts')->name('accounts-')->group(function () {
     Route::put('/{account}', [A::class, 'update'])->name('update')->middleware('role:admin|manager'); // update existing account
     Route::delete('/{account}', [A::class, 'destroy'])->name('destroy')->middleware('role:admin|manager'); // delete existing account
 });
+
+Route::prefix('transfers')->name('transfers-')->group(function () {
+    Route::get('/', [T::class, 'index'])->name('index')->middleware('role:admin|manager');
+    Route::get('/create', [T::class, 'create'])->name('create')->middleware('role:admin|manager'); // show create form
+    Route::post('/', [T::class, 'store'])->name('store')->middleware('role:admin|manager'); // store new account
+});
+
 
 Auth::routes(['register' => false]);

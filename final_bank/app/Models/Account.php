@@ -13,4 +13,14 @@ class Account extends Model
     {
         return $this->belongsTo(Bank::class);
     }
+
+    public function sourceTransfers()
+    {
+        return $this->hasMany(Transfer::class, 'source_account_id');
+    }
+
+    public function targetTransfers()
+    {
+        return $this->hasMany(Transfer::class, 'target_account_id');
+    }
 }

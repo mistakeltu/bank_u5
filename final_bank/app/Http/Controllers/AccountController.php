@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Bank;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
@@ -35,6 +36,23 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'bank_id' => 'required',
+            ],
+            [
+                'bank_id.required' => 'You must select bank client.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('accounts-create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $account = new Account;
 
         $account->account_number = 'LT' . rand(100000000000000000, 999999999999999999);

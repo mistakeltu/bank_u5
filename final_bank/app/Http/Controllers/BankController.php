@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bank;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 class BankController extends Controller
@@ -34,6 +35,36 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'date' => 'required|date',
+                'first_name' => 'required|min:3|max:255',
+                'last_name' => 'required|min:3|max:255',
+                'personal_code' => 'required|min:11|max:11',
+            ],
+            [
+                'date.required' => 'Creating day is required.',
+                'first_name.min' => 'First name must be at least 3 characters.',
+                'last_name.max' => 'Last name must be less than 255 characters.',
+                'personal_code.min' => 'Personal code must be 11 numbers.',
+                'personal_code.max' => 'Personal code must be 11 numbers.',
+                'first_name.required' => 'First name is required.',
+                'last_name.required' => 'Last name is required.',
+                'personal_code.numeric' => 'Personal code must be a number.',
+                'personal_code.required' => 'Personal code is required.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('banks-create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
         $bank = new Bank;
 
         $bank->account_date = $request->date;
