@@ -62,7 +62,7 @@ class TransferController extends Controller
         $sourceAccount = Account::where('id', $request->input('source_account_id'))->first();
         $targetAccount = Account::where('id', $request->input('target_account_id'))->first();
 
-        dump($sourceAccount);
+        // dump($sourceAccount);
         // die;
 
         // Check if source and target accounts exist
@@ -73,6 +73,17 @@ class TransferController extends Controller
         // Check if the source account has sufficient balance
         if ($sourceAccount->account_amount < $request->input('amount')) {
             return back()->withErrors(['message' => 'Insufficient balance in the source account.']);
+        }
+
+        // Check if the amount exceeds a threshold (e.g., 1000)
+        if ($request->input('amount') > 1000) {
+            dump('Reached confirmation step');
+            // Amount exceeds the threshold, show confirmation view
+            return view('transfers.confirm', [
+                'amount' => $request->input('amount'),
+                'sourceAccount' => $sourceAccount,
+                'targetAccount' => $targetAccount,
+            ]);
         }
 
         // Perform the transfer within a database transaction
@@ -88,6 +99,51 @@ class TransferController extends Controller
         DB::commit();
 
         return redirect()->route('home')->with('success', 'Money transferred successfully.');
+    }
+
+    public function confirm(Request $request)
+    {
+        // Validate the form input
+        $request->validate([
+            'source_account_id' => 'required|exists:accounts,id',
+            'target_account_id' => 'required|exists:accounts,id',
+            'amount' => 'required|numeric|min:0.01',
+        ]);
+
+        // Get the source and target accounts based on bank IDs
+        $sourceAccount = Account::where('id', $request->input('source_account_id'))->first();
+        $targetAccount = Account::where('id', $request->input('target_account_id'))->first();
+
+        // Check if source and target accounts exist
+        if (!$sourceAccount || !$targetAccount) {
+            return back()->withErrors(['message' => 'Invalid source or target bank IDs.']);
+        }
+
+        // Check if the HTTP method is GET (displaying the confirmation form)
+        if ($request->isMethod('get')) {
+            return view('transfers.confirm', [
+                'amount' => $request->input('amount'),
+                'sourceAccount' => $sourceAccount,
+                'targetAccount' => $targetAccount,
+            ]);
+        }
+
+        // Check if the HTTP method is POST (submitting the confirmation form)
+        if ($request->isMethod('post')) {
+            // Perform the transfer within a database transaction
+            DB::beginTransaction();
+
+            // Deduct the amount from the source account
+            $sourceAccount->decrement('account_amount', $request->input('amount'));
+
+            // Add the amount to the target account
+            $targetAccount->increment('account_amount', $request->input('amount'));
+
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->route('home')->with('success', 'Money transferred successfully.');
+        }
     }
 
     /**

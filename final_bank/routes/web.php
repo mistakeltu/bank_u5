@@ -23,7 +23,7 @@ use App\Http\Controllers\TransferController as T;
 // });
 
 Route::get('/', [H::class, 'index'])->name('home');
-// Route::get('/home', [H::class, 'index'])->name('home');
+Route::get('/home', [H::class, 'index'])->name('home');
 
 Route::prefix('banks')->name('banks-')->group(function () {
     Route::get('/', [B::class, 'index'])->name('index')->middleware('role:admin|manager|user'); // all banks
@@ -54,6 +54,7 @@ Route::prefix('accounts')->name('accounts-')->group(function () {
 Route::prefix('transfers')->name('transfers-')->group(function () {
     Route::get('/', [T::class, 'index'])->name('index')->middleware('role:admin|manager');
     Route::get('/create', [T::class, 'create'])->name('create')->middleware('role:admin|manager'); // show create form
+    Route::post('/confirm', [T::class, 'confirm'])->name('confirm')->middleware('role:admin|manager'); // show create form
     Route::post('/', [T::class, 'store'])->name('store')->middleware('role:admin|manager'); // store new account
 });
 

@@ -15,7 +15,7 @@
                         <p>Total Account Amount: {{ $totalAccountAmount }}</p>
                         <p>Biggest Amount in an Account: {{ $biggestAmount }}</p>
                         <p>Average Amount Across All Accounts: {{ $averageAmount }}</p>
-                        <p>Average Amount Across All Accounts: {{ $negativeAccounts ? 'No accounts with negative amount of money' : '' }}</p>
+                        <p>Bank Accounts with Negative Balance: {{ $negativeAccounts ? 'No accounts with negative amount of money' : '' }}</p>
                         @foreach ($bank as $bankItem)
                             <h4>{{ $bankItem->client_firstname }}</h4>
 
